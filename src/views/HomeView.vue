@@ -1,18 +1,38 @@
-<template>
+<template>       
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <!-- show Error when problem with fetching data  -->
+    <div v-if="error">{{ error }}</div>
+
+    <!-- Show post list or Loading data... msg.  -->
+    <div v-if="posts.length">
+      <PostList  :posts="posts" />
+    </div>
+    <div v-else>Loading data...</div>
+
+    <!-- button to show and hide posts -->
+    <button @click="showPosts = !showPosts">
+      <p v-if="showPosts">Hide Post</p>
+      <p v-if="!showPosts">Show Post</p>
+    </button>
+
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import PostList from '../components/PostList.vue'
+import getPosts from '../composables/getPosts'
 
 export default {
   name: 'HomeView',
   components: {
-    HelloWorld
+    PostList,
+  },
+  setup() {
+    const { posts, error, load } = getPosts()
+    
+    load()
+    
+    return { posts, error }
   }
 }
 </script>
