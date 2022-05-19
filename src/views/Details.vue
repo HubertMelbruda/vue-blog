@@ -4,24 +4,43 @@
     <h3>{{ post.title }}</h3>
     <p>{{ post.body }}</p>
   </div>
+  <div v-else><Spinner /></div>
 </template>
 
 <script>
-import getPost from '../composables/getPost'
+import getPost from "../composables/getPost"
+import Spinner from "../components/Spinner.vue"
+import { useRoute } from "vue-router"
 
 export default {
-  props: ['id'], 
+  props: ["id"],
+  components: {
+    Spinner,
+  },
   setup(props) {
     const { post, error, load } = getPost(props.id)
 
     load()
 
     return { post, error }
-  }
-
+  },
 }
 </script>
 
-<style>
-
+<style scoped>
+.tags a {
+  margin-right: 10px;
+}
+.post {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.post p {
+  color: #444;
+  line-height: 1.5em;
+  margin-top: 40px;
+}
+.pre {
+  white-space: pre-wrap;
+}
 </style>

@@ -1,22 +1,27 @@
-import { ref } from 'vue'
+import { ref } from "vue"
 
 const getPosts = () => {
-  const posts = ref([]);
-  const error = ref(null);
+  const posts = ref([])
+  const error = ref(null)
+  const axios = require("axios")
 
   const load = async () => {
     try {
-      let data = await fetch("http://localhost:8000/posts");
-      if (!data.ok) {
-        throw Error("No data available");
-      }
-      posts.value = await data.json();
-    } catch (err) {
-      error.value = err.message;
-    }
-  };
+      // simulation delay
+      await new Promise(resolve => {
+        setTimeout(resolve, 2000)
+      })
 
-  return { posts, error, load}
-};
+      const data = await axios.get("http://localhost:8000/posts")
+      posts.value = data.data
+    } catch (error) {
+      if (error.response.statusText !== "OK") {
+        error.value =
+          "Problem with a server. Status code: " + error.response.status
+      }
+    }
+  }
+  return { posts, error, load }
+}
 
 export default getPosts
