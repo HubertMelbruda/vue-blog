@@ -4,14 +4,17 @@
        <h3>{{ post.title }}</h3>
     </router-link>
     <p>{{ snippet }}</p>
-    <span v-for="tag in post.tags" :key='tag'>
-      
+    <span v-for="tag in post.tags" :key='tag' >
+      <router-link :to="{ name: 'Tag', params: { tag: tag}}" class="pill">
+        #{{ tag }}
+      </router-link>
     </span>
   </div>
 </template>
 
 <script>
 import { computed } from '@vue/runtime-core'
+
 export default {
   props: ['post'], 
   setup(props) {

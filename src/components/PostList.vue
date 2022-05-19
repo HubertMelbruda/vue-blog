@@ -1,6 +1,5 @@
 <template>
   <div class="post-list">
-    Post List 
     <div v-for="post in posts" :key="post.id">
       <SinglePost :post="post"/>
     </div>
@@ -15,10 +14,7 @@ import SinglePost from './SinglePost.vue'
    props: ['posts'],
    components: {
      SinglePost,
-   }, 
-   setup(props) {
-    
-   }
+   },
 }
 </script>
 
