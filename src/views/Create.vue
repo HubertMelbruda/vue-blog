@@ -60,7 +60,6 @@ export default {
 }
 </script>
 <style>
-
   .form {
     max-width: 480px;
     margin: 0 auto;
@@ -90,7 +89,7 @@ export default {
     display: block;
     width: 100%;
     height: 100%;
-    background: #ff8800;
+    background: #d8188e;
     position: absolute;
     z-index: -1;
     padding-right: 40px;
@@ -100,10 +99,11 @@ export default {
   .button {
     display: block;
     margin-top: 30px;
-    background: #ff8800;
+    background: #d8188e;
     color: white;
     border: none;
-    padding: 8px 16px;
+    border-radius: 15px;
+    padding: 8px 25px;
     font-size: 18px
   }
   .pill {

@@ -1,23 +1,20 @@
 <template>
   <div class="home">
-    <!-- show Error when problem with fetching data  -->
     <div v-if="error">{{ error }}</div>
-
-    <!-- Show post list or Loading data... msg.  -->
     <div v-if="isPostVisible">
       <div v-if="posts.length" class="layout">
         <PostList :posts="posts" />
-        <TagCloud :posts="posts"/>
+        <TagCloud :posts="posts" />
       </div>
-      <div v-else><Spinner /></div>
+      <div v-else>
+        <Spinner />
+      </div>
     </div>
-
-    <!-- button to show and hide posts -->
-    <button @click="showPosts">
-      <p v-if="showPosts">Hide Post</p>
-      <p v-if="!showPosts">Show Post</p>
-    </button>
-  </div>
+      <button v-if="posts.length" @click="showPosts" class="button">
+        <p v-if="showPosts">Hide Post</p>
+        <p v-if="!showPosts">Show Post</p>
+      </button>
+    </div>
 </template>
 
 <script>
@@ -36,6 +33,7 @@ export default {
   },
   setup() {
     const isPostVisible = ref(true)
+
     const showPosts = () => {
       isPostVisible.value = !isPostVisible.value
     }

@@ -12,7 +12,6 @@ export default {
   components: {
     NavBar,
   }
-  
 }
 </script>
 
@@ -26,7 +25,4 @@ export default {
 }
 
 
-.router-view{
-  padding:30px
-}
 </style>

@@ -9,7 +9,7 @@ const getPost = (id) => {
     try {
       // simulation delay 
       await new Promise(resolve => {
-        setTimeout(resolve, 2000)
+        setTimeout(resolve, 1000)
       })
 
       let data = await axios.get("http://localhost:8000/posts/" + id);
