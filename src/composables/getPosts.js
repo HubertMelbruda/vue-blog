@@ -1,3 +1,4 @@
+import { projectFirestore } from "@/firebase/config"
 import { ref } from "vue"
 
 const getPosts = () => {
@@ -8,17 +9,21 @@ const getPosts = () => {
   const load = async () => {
     try {
       // simulation delay
-      await new Promise(resolve => {
-        setTimeout(resolve, 1000)
-      })
+      // await new Promise(resolve => {
+      //   setTimeout(resolve, 1000)
+      // })
 
-      const data = await axios.get("http://localhost:8000/posts")
-      posts.value = data.data
-    } catch (error) {
-      if (error.response.statusText !== "OK") {
-        error.value =
-          "Problem with a server. Status code: " + error.response.status
-      }
+      // fetch data from localhost
+      // const data = await axios.get("http://localhost:8000/posts")
+      // posts.value = data.data
+
+      const res = await projectFirestore.collection("posts").get()
+
+      posts.value = res.docs.map(doc => {
+        return { ...doc.data(), id: doc.id }
+      })
+    } catch (err) {
+      error.value = err.message
     }
   }
   return { posts, error, load }
