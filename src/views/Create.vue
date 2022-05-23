@@ -21,10 +21,10 @@
 <script>
 import { ref } from '@vue/reactivity'
 import { useRouter } from 'vue-router'
+import { projectFirestore, timeStamp } from '@/firebase/config'
 
 export default {
   setup() {
-    const axios = require("axios")
     const title = ref('')
     const body = ref('')
     const tag = ref('')
@@ -47,10 +47,13 @@ export default {
       const post = {
         title: title.value,
         body: body.value,
-        tags: tags.value
+        tags: tags.value,
+        createAt: timeStamp()
         }
 
-       await axios.post('http://localhost:8000/posts/', post)
+        //add user post to database
+       const res = await projectFirestore.collection('posts').add(post)
+
        router.push({ name: 'home'})
     }
 

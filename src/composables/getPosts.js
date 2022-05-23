@@ -17,7 +17,9 @@ const getPosts = () => {
       // const data = await axios.get("http://localhost:8000/posts")
       // posts.value = data.data
 
-      const res = await projectFirestore.collection("posts").get()
+      const res = await projectFirestore.collection("posts")
+      .orderBy('createAt', 'asc')
+      .get()
 
       posts.value = res.docs.map(doc => {
         return { ...doc.data(), id: doc.id }

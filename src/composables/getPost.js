@@ -5,6 +5,7 @@ const getPost = id => {
   const post = ref(null)
   const error = ref(null)
 
+
   const load = async () => {
     try {
       // let data = await axios.get("http://localhost:8000/posts/" + id);
@@ -17,9 +18,10 @@ const getPost = id => {
       }
 
       post.value = { ...res.data(), id: res.id }
-      console.log(post.value)
     } catch (err) {
       error.value = err.message
+    } finally {
+      console.log("Ten blok kodu wykonuje się zawsze, nawet po ERROR")
     }
   }
 

@@ -13,6 +13,8 @@ export default {
     NavBar,
   }
 }
+
+
 </script>
 
 <style>
@@ -26,3 +28,5 @@ export default {
 
 
 </style>
+
+
